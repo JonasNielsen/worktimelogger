@@ -1,0 +1,16 @@
+!!!
+%body
+	%head
+		= stylesheet_link_tag    "signin", media: "all"
+		%title
+			Timelogger Login
+
+	%body
+		%div.container
+			%form{:controller => 'sessions', :action => "create", :method => "post", :class => "form-signin"}
+				%h2.form-signin-heading Timelogger -  log ind		
+				%input{:type => "email", :name => "email", :class => "form-control", :placeholder => "Email adresse", :autofocus => ""} 
+				%input{:type => "password", :name => "password", :class => "form-control", :placeholder => "password", :pattern => ".{6,}"}
+				<br />
+				%button{:type => "submit", :class => "btn btn-lg btn-success btn-block", :id => "loginBtn"} Log ind
+		
