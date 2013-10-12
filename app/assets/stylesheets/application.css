@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+.successMsg {
+	color: green;
+	font-style: italic;
+}
+
+ .errorMessage {
+ 	color: red;
+ 	font-style: italic;
+ }

@@ -12,7 +12,8 @@ gem 'jquery-rails'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
 
-gem 'bcrypt-ruby'
+gem 'protected_attributes'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

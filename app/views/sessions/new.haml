@@ -7,10 +7,20 @@
 
 	%body
 		%div.container
-			%form{:controller => 'sessions', :action => "create", :method => "post", :class => "form-signin"}
-				%h2.form-signin-heading Timelogger -  log ind		
-				%input{:type => "email", :name => "email", :class => "form-control", :placeholder => "Email adresse", :autofocus => ""} 
-				%input{:type => "password", :name => "password", :class => "form-control", :placeholder => "password", :pattern => ".{6,}"}
-				<br />
-				%button{:type => "submit", :class => "btn btn-lg btn-success btn-block", :id => "loginBtn"} Log ind
-		
+			= form_for '', url: signin_path, html: {:class => 'form-signin'} do |f|
+				= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+				- if flash[:successMsg] 
+					%div.successMsg
+						= flash[:successMsg]
+				%h2.form-signin-heading Timelogger -  log ind 	
+				
+				- if flash[:errorMsg] 
+					%div.errorMessage
+						= flash[:errorMsg]
+
+				= f.email_field :email, :class => 'form-control', :placeholder => 'Email adresse'
+				= f.password_field :password, :class => 'form-control password', :placeholder => 'Kodeord'
+				
+				= f.submit 'Log ind', :class => 'btn btn-lg btn-success btn-block', :id => 'loginBtn'
+				eller
+				= link_to 'Opret bruger', {:controller => 'users', :action => 'new'}

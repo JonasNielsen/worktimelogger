@@ -1,0 +1,29 @@
+!!!
+%body
+	%head
+		%title
+			Timelogger Opret Bruger
+	%body
+		%div.container
+			= form_for @user, html: {:class => 'form-create'} do |f|
+				= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) 
+				%h2.form-signin-heading Timelogger -  opret bruger 	
+				
+				- @user.errors.full_messages.each do |msg|
+					%p.errorMessage
+						*
+						= msg
+				
+				= f.text_field :name, :class => 'form-control', :placeholder => "Navn"
+				= f.email_field :email, :class => 'form-control', :placeholder => 'Email adresse'
+				= f.password_field :password, :class => 'form-control password', :placeholder => 'Kodeord', :pattern => ".{6,}"
+				= f.password_field :password_confirmation, :class => 'form-control password_confirmation', :placeholder => 'Bekræft kodeord', :pattern => ".{6,}"
+
+				= f.submit 'Opret bruger', :class => 'btn btn-lg btn-success btn-block', :id => 'loginBtn'
+				eller
+				= link_to 'Log ind', {:controller => 'sessions', :action => 'new'}
+
+
+
+
+

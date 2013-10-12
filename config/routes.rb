@@ -1,12 +1,12 @@
 Timelogger::Application.routes.draw do
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
 
   root 'sessions#new'
 
-  get '/signup', to: 'users#new'
-  get '/signin', to: 'sessions#new'
-  get '/signout', to: 'sessions#destroy'
+  get 'signup' => 'users#new'
+  get 'signin' => 'sessions#new'
+  post 'signin' => 'sessions#create'
+  get 'signout' => 'sessions#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
