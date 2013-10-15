@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
 
 	def new
-		render 'new'
+		if session[:user_id]
+			redirect_to new_workday_path
+		else
+			render :layout => nil
+		end
 	end
 
 	def create

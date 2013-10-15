@@ -1,4 +1,6 @@
 Timelogger::Application.routes.draw do
+  resources :workdays
+
   resources :users
 
   root 'sessions#new'

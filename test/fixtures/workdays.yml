@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  worktime: 
+  description: 
+  user_id: 1
+
+two:
+  worktime: 
+  description: 
+  user_id: 1

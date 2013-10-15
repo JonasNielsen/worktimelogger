@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+%html
+	%head
+		%title
+			WorkdayLogger
+
+		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+		= javascript_include_tag "application", "data-turbolinks-track" => true 
+		= csrf_meta_tags 
+
+	%body
+		%div.btn-group
+			%a.btn.btn-link{:href => new_workday_path} I dag
+			%span.seperator
+				|
+			%a.btn.btn-link Månedsoversigt
+			%span.seperator
+				|
+			%a.btn.btn-link{:href => signout_path} Log ud
+
+
+		%div.container.workday
+			%div.content
+				= yield
+
+		:javascript
+			$(window).resize();

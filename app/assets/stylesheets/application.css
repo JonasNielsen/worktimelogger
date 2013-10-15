@@ -17,7 +17,60 @@
 	font-style: italic;
 }
 
- .errorMessage {
- 	color: red;
- 	font-style: italic;
- }
+.errorMessage {
+	color: red;
+	font-style: italic;
+}
+
+nav {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.container .workday {
+	max-width: 600px;
+	margin: 0 auto;
+	background: #f8f8f8;
+	border: 1px solid #e6e6e6;
+}
+
+.content {
+	padding: 60px;
+	text-align: center;
+}
+
+.btn-group {
+	position: absolute;
+	float: right;
+	margin-right: 20px;
+	margin-top: -20px;
+}
+
+.descriptionContainer {
+	display: none;
+}
+
+.seperator {
+	color: grey;
+}
+
+a.workday-btn {
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.workcount {
+	margin-bottom: 20px;
+}
+
+.workcount .hourDecimal {
+	font-size: 78px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.workcount .text {
+	font-style: italic;
+	font-size: 40px;
+}

@@ -15,3 +15,14 @@
 //= require turbolinks
 //= require_tree .
 //= require twitter/bootstrap
+
+
+$(window).resize(function(){
+
+    $('.workday').css({
+        position:'absolute',
+        left: ($(window).width() - $('.workday').outerWidth())/2,
+        top: ($(window).height() - $('.workday').outerHeight())/2
+    });
+
+});

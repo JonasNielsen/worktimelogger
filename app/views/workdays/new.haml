@@ -1,0 +1,25 @@
+%div.workcount
+	%span.workcount.hourDecimal.hourDecimalHour 0
+	%span.workcount.hourDecimal.hourDecimalMinutes  
+	%span.workcount.text arbejdstimer
+	<br />
+	%span.workcount.extracount 
+		(
+		%span.workcount.hour
+			0 
+		timer 
+		%span.workcount.minutes
+			0 
+		minutter
+		%span.workcount.seconds
+			0
+		sekunder )
+
+%div.descriptionContainer
+	%span.descriptionTitle
+		Hvad fik du lavet idag?
+	<br />
+	%textarea{:cols => 100, :rows => 5}
+
+%a.btn.btn-default.workday-btn.startBtn Start arbejdsdag
+%a.btn.btn-default.workday-btn.stopBtn Stop arbejdsdag
