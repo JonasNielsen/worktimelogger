@@ -1,0 +1,28 @@
+= form_for '', url: '/workdays/filter' do |f|
+	= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+	Fra: 
+	= f.date_field :fromDate, :placeholder => 'fx. 18-02-2013'
+	
+	\- Til:
+	= f.date_field :toDate, :placeholder => 'fx. 01-03-2013'
+	=f.submit :value => 'Filtrer', :class => 'btn btn-default', :style => 'margin-top: -10px;'
+
+%table.table.table-hover
+	%thead
+		%tr
+			%th
+				Dato
+			%th
+				Arbejdstimer
+			%th
+				Arbejdsbeskrivelse
+	%tbody
+		- @workdays.each do |w|
+			%tr
+				%td
+					= w.date
+				%td
+					= w.worktime
+				%td
+					= w.description
+%a.btn.btn-default Printvenlig version

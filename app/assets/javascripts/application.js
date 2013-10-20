@@ -18,11 +18,11 @@
 
 
 $(window).resize(function(){
-
-    $('.workday').css({
+	if($('.table-hover').length == 0) {
+		$('.workday').css({
         position:'absolute',
         left: ($(window).width() - $('.workday').outerWidth())/2,
         top: ($(window).height() - $('.workday').outerHeight())/2
-    });
-
+		});
+	}
 });

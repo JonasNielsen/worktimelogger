@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20131013104443) do
 
   create_table "workdays", force: true do |t|
     t.decimal  "worktime"
+    t.string   "date"
     t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at"

@@ -19,7 +19,14 @@
 	%span.descriptionTitle
 		Hvad fik du lavet idag?
 	<br />
-	%textarea{:cols => 100, :rows => 5}
-
+	%textarea{:cols => 100, :rows => 5, id: 'description'}
+	<br />
+	%a.btn.btn-default.saveBtn Gem arbejdsdagen
+	<br /><br />
 %a.btn.btn-default.workday-btn.startBtn Start arbejdsdag
 %a.btn.btn-default.workday-btn.stopBtn Stop arbejdsdag
+%div.dateContainer
+	Dato: 
+	- time = Time.new
+	%span.date
+		= time.strftime("%m-%d-%Y")

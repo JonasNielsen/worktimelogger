@@ -1,5 +1,6 @@
 Timelogger::Application.routes.draw do
   resources :workdays
+  post 'workdays/filter' => 'workdays#filter' # Only select ones within date span
 
   resources :users
 

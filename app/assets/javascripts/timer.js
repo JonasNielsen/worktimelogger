@@ -19,11 +19,36 @@ $(function() {
 	});
 
 	$('.stopBtn').on('click', function() {
+		// Stop the timer
 		clearInterval(secTimer);
+
+		// Sent data
 		$('.descriptionContainer').slideDown('fast', function() {
-			//alert('All done');
+			// Something here
 		});
 	});
+
+	$('.saveBtn').on('click', function() {
+		time = $('.hourDecimalHour').text() + $('.hourDecimalMinutes').text();
+		date = $('.date').text().trim();
+
+		data = '{\"workday\":{\"worktime\":\"'+time+'\",\"description\":\"' + $('#description').val() + '\",\"date\":\"' + date +'\"}}';
+		console.log(data);
+
+		$.ajax({
+			url: '/workdays',
+			dataType: 'json',
+			type: 'POST',
+			processData: false,
+			contentType: 'application/json',
+			data: data
+		});
+
+		$('.descriptionContainer').slideUp('fast', function() {
+			// Something here
+		});
+	});
+
 
 	function secTimerUpdate() {
 		seconds++;
