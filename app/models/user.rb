@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :workdays
+	
 	attr_protected :password_digest
 
 	validates :password, :presence => true, 
