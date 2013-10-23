@@ -7,6 +7,8 @@ class WorkdaysController < ApplicationController
 
 		@user = User.find(session[:user_id])
 		@workdays = @user.workdays.find(:all, :conditions => ['date >= ? and date <= ?', dateStart, dateEnd])
+		@salary = @user.calculate_salary
+		@workhours = @user.total_workhours
 	end
 
 	def new
