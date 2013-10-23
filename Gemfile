@@ -12,6 +12,8 @@ gem 'jquery-rails'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
 gem 'jquery-cookie-rails'
+gem 'prawn'
+gem 'prawnto'
 
 gem 'protected_attributes'
 gem 'bcrypt-ruby', '~> 3.0.0'
