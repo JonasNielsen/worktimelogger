@@ -132,7 +132,7 @@ $(document).on('click', '.startBtn', function() {
 	$('.descriptionContainer').slideUp('fast');
 
 	workHour = parseFloat($('.hourDecimal').text());
-	secTimer = setInterval(secTimerUpdate, 10);
+	secTimer = setInterval(secTimerUpdate, 1000);
 	disableStartBtnEnableStopBtn();
 });
 
