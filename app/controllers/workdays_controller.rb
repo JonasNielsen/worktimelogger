@@ -2,13 +2,18 @@ class WorkdaysController < ApplicationController
 
 	def index
 		time = Time.new
-		dateStart = time.strftime('01/%m/%Y').to_date
-		dateEnd = time.strftime('31/%m/%Y').to_date
+		@dateStart = time.strftime('01/%m/%Y').to_date
+		@dateEnd = time.strftime('31/%m/%Y').to_date
 
 		@user = User.find(session[:user_id])
-		@workdays = @user.workdays.find(:all, :conditions => ['date >= ? and date <= ?', dateStart, dateEnd])
+		@workdays = @user.workdays.find(:all, :conditions => ['date >= ? and date <= ?', @dateStart, @dateEnd])
 		@salary = @user.calculate_salary
 		@workhours = @user.total_workhours
+
+		respond_to do |format| 
+			format.html
+			format.pdf { render :layout => false} 
+   		end 
 	end
 
 	def new
