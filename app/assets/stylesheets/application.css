@@ -68,3 +68,9 @@ a.workday-btn {
 	font-style: italic;
 	font-size: 40px;
 }
+
+.totalSalary {
+	border-top: 1px solid lightgrey;
+	margin-bottom: 20px;
+	float: right;
+}
