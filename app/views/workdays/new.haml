@@ -1,6 +1,11 @@
 %div.workcount
-	%span.workcount.hourDecimal.hourDecimalHour 0
-	%span.workcount.hourDecimal.hourDecimalMinutes  
+	%span.workcount.hourDecimal
+		- if @workday != nil
+			= @workday.worktime
+		- else
+			0
+		
+
 	%span.workcount.text arbejdstimer
 	<br />
 	%span.workcount.extracount 
@@ -20,13 +25,21 @@
 		Hvad fik du lavet idag?
 	<br />
 	%textarea{:cols => 100, :rows => 5, id: 'description'}
+		- if @workday != nil
+			= @workday.description
 	<br />
 	%a.btn.btn-default.saveBtn Gem arbejdsdagen
 	<br /><br />
-%a.btn.btn-default.workday-btn.startBtn Start arbejdsdag
-%a.btn.btn-default.workday-btn.stopBtn Stop arbejdsdag
+- if @workday != nil
+	%button.btn.btn-default.workday-btn.startBtn Fortsæt arbejdsdag
+-else
+	%button.btn.btn-default.workday-btn.startBtn Start arbejdsdag
+%button.btn.btn-default.workday-btn.stopBtn{:disabled => true} Stop arbejdsdag
 %div.dateContainer
 	Dato: 
 	- time = Time.new
 	%span.date
-		= time.strftime("%d-%m-%Y")
+		= time.strftime("%d/%m/%Y")
+
+:javascript
+	siteRefreshed();

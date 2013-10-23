@@ -1,99 +1,124 @@
-$(function() {
-	var seconds = 0;
-	var minutes = 0;
-	var hours = 0;
+var seconds = 0;
+var minutes = 0;
+var hours = 0;
 
-	var secTimer;
+var workHour;
 
-	$('.startBtn').on('click', function() {
-		$('.descriptionContainer').slideUp('fast', function() {
-			//alert('All done');
-		});
+var secTimer;
 
-		$('.hourDecimalMinutes').text('.25'); // Start by 15 minutes
+function updateSecMinHours() {
+	$('.seconds').text(seconds);
+	$('.minutes').text(minutes);
+	$('.hour').text(hours);
+}
 
-		secTimer = setInterval(secTimerUpdate, 1000);
-
-		minTimer = 0;
-		hourTimer = 0;
-	});
-
-	$('.stopBtn').on('click', function() {
-		// Stop the timer
-		clearInterval(secTimer);
-
-		// Sent data
-		$('.descriptionContainer').slideDown('fast', function() {
-			// Something here
-		});
-	});
-
-	$('.saveBtn').on('click', function() {
-		time = $('.hourDecimalHour').text() + $('.hourDecimalMinutes').text();
-		date = $('.date').text().trim();
-
-		data = '{\"workday\":{\"worktime\":\"'+time+'\",\"description\":\"' + $('#description').val() + '\",\"date\":\"' + date +'\"}}';
-		console.log(data);
-
-		$.ajax({
-			url: '/workdays',
-			dataType: 'json',
-			type: 'POST',
-			processData: false,
-			contentType: 'application/json',
-			data: data
-		});
-
-		$('.descriptionContainer').slideUp('fast', function() {
-			// Something here
-		});
-	});
-
-
-	function secTimerUpdate() {
-		seconds++;
-		
-		if(seconds == 60) {
-			minTimerUpdate()
-			seconds = 0;
-		}
-
-		$('.seconds').text(seconds);
-	}
-
-	function minTimerUpdate() {
-		
-		console.log("Minutes: " + minutes);
+function secTimerUpdate() {
+	seconds++;
+	if(seconds == 60) {
 		minutes++;
-
-		if(minutes > 0 && minutes <= 15) {
-			$('.hourDecimalMinutes').text('.25'); 
-		}
-		else if(minutes > 15 && minutes <= 30) {
-			$('.hourDecimalMinutes').text('.5'); 
-		}
-		else if(minutes > 30 && minutes <= 45) {
-			$('.hourDecimalMinutes').text('.75'); 
-		}
-		else if(minutes == 46) {
-			$('.hourDecimalMinutes').text('');
-			hourTimerUpdate();
- 		}
-
- 		if(minutes == 60) {
- 			$('.hour').text(hours);
-			minutes = 0;
-		}
-
-		$('.minutes').text(minutes);
+		minTimerUpdate()
+		seconds = 0;
 	}
 
-	function hourTimerUpdate() {
-		console.log("Hours: " + hours);
-
-		hours++;
-		$('.hourDecimalHour').text(hours);
+	if((seconds%10) == 0) {
+		updateTimeCookie();
 	}
 
+	$('.seconds').text(seconds);
+}
 
-})
+function minTimerUpdate() {
+	updateWorkHour();
+	if(minutes == 60) {
+			$('.hour').text(hours);
+		minutes = 0;
+	}
+
+	$('.minutes').text(minutes);
+}
+
+function updateWorkHour() {
+	if(minutes == 1 || minutes == 16 || minutes == 31 || minutes == 46) {
+		workHour = workHour  + 0.25;
+		$('.hourDecimal').text(workHour); 
+	}
+}
+
+function updateDB() {
+	date = $('.date').text().trim();
+
+	data = '{\"workday\":{\"worktime\":\"'+workHour+'\",\"description\":\"' + $('#description').val() + '\",\"date\":\"' + date +'\"}}';
+
+	$.ajax({
+		url: '/workdays',
+		dataType: 'json',
+		type: 'POST',
+		processData: false,
+		contentType: 'application/json',
+		data: data
+	});
+}
+
+function updateTimeCookie() {
+	data = '{\"worktime\":\"'+workHour+'\",\"hours\":\"' + hours + '\",\"minutes\":\"' + minutes +'\",\"description\":\"' + $('#description').val() + '\",\"seconds\":\"' + seconds + '\"}';
+
+	$.cookie('timeJson', data);
+}
+
+// Load values
+function siteRefreshed() {
+	if($.cookie('timeJson')) {
+		var cookieData = $.cookie('timeJson');
+		var cookieJson = jQuery.parseJSON(cookieData);
+
+		seconds = cookieJson.seconds;
+		minutes = cookieJson.minutes;
+		hours = cookieJson.hours;
+		workHour = cookieJson.worktime;
+		updateSecMinHours();
+
+		if(parseFloat(cookieJson.worktime) != parseFloat($('.hourDecimal').text())) {
+			updateDB();
+			$('.hourDecimal').text(cookieJson.worktime)
+		}
+	}
+}
+
+
+// Start btn
+$(document).on('click', '.startBtn', function() {
+	$('.descriptionContainer').slideUp('fast', function() {
+		// Something here
+	});
+
+	workHour = parseFloat($('.hourDecimal').text());
+
+	secTimer = setInterval(secTimerUpdate, 10);
+
+	$('.startBtn').attr('disabled', true);
+	$('.startBtn').text('Fortsæt arbejdsdag');
+	$('.stopBtn').attr('disabled', false);
+});
+
+// Stop btn
+$(document).on('click', '.stopBtn', function() {
+	// Stop the timer
+	clearInterval(secTimer);
+
+	// Sent data
+	$('.descriptionContainer').slideDown('fast', function() {
+		// Something here
+	});
+
+	$('.startBtn').attr('disabled', false);
+	$('.stopBtn').attr('disabled', true);
+});
+
+// Save btn
+$(document).on('click', '.saveBtn',function() {
+	updateDB();
+
+	$('.descriptionContainer').slideUp('fast', function() {
+		// Something here
+	});
+});
