@@ -22,11 +22,6 @@
 	font-style: italic;
 }
 
-nav {
-	max-width: 600px;
-	margin: 0 auto;
-}
-
 .container .workday {
 	max-width: 600px;
 	margin: 0 auto;
@@ -39,8 +34,7 @@ nav {
 	text-align: center;
 }
 
-.btn-group {
-	position: absolute;
+nav {
 	float: right;
 	margin-right: 20px;
 	margin-top: -20px;
