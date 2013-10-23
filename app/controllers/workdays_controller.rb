@@ -38,15 +38,6 @@ class WorkdaysController < ApplicationController
 		end
 	end
 
-	def storeTimeCookie
-		cookies[:timeJson] = params[:time]
-	end
-
-	def loadTimeCookie
-		time = cookies[:timeJson]
-		time #return json of time
-	end
-
 	def filter
 		@user = User.find(session[:user_id])
 		@workdays = @user.workdays.find(:all, :conditions => ['date >= ? AND date <= ?', params[:fromDate].to_s.to_date, params[:toDate].to_s.to_date])
