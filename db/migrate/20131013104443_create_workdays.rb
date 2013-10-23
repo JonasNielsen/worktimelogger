@@ -2,7 +2,7 @@ class CreateWorkdays < ActiveRecord::Migration
   def change
     create_table :workdays do |t|
       t.decimal :worktime
-      t.string :date
+      t.date :date
       t.text :description
       t.integer :user_id
 
