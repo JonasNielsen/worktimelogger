@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
+gem 'jquery-cookie-rails'
 
 gem 'protected_attributes'
 gem 'bcrypt-ruby', '~> 3.0.0'
